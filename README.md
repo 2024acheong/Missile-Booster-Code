@@ -2,7 +2,7 @@
 
 # Missile Booster Performance Analysis
 
-This project is a computational tool for analyzing the effect of pop-out booster size on missile performance. Developed as part of an engineering class project, the code allows for modifications to key missile parameters, including booster size, upper stage dimensions, specific impulse (Isp), and grain loadings. The goal is to optimize system risk and performance by simulating and evaluating different design configurations.
+This project is a computational tool for analyzing the effect of pop-out booster size on missile performance. Developed for the U.S. Navy as part of an engineering class project, the code allows for modifications to key missile parameters, including booster size, upper stage dimensions, specific impulse (Isp), and grain loadings. The goal is to optimize system risk and performance by simulating and evaluating different design configurations.
 
 ## Features
 - Adjustable booster size and upper stage parameters  
