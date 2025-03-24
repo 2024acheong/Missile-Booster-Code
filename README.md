@@ -9,7 +9,8 @@ This project is a computational tool for analyzing the effect of pop-out booster
 - Simulation of missile propulsion dynamics  
 - Performance analysis based on thrust, burn time, and efficiency  
 - Customizable Isp and grain loadings for optimization  
-- Designed for evaluating trade-offs in naval missile systems  
+- Designed for evaluating trade-offs in naval missile systems
+- Generation of charts to visualized data
 
 ## Technologies Used
 - Python (or specify the programming language)  
