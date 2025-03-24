@@ -5,7 +5,22 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const missileDiameter = 1;
+  const propulsionStackLength = 10;
+  var isp = 1;
+  const payload = 250;
+  const g = 9.81;
 
+  var propellantMass = 1;
+  var structureMass = 1;
+  const finalMass = payload;
+  const initialMass = payload + propellantMass + structureMass;
+  const exitVelocity = isp * g;
+  const deltaV = (iMass, fMass) => {
+    return exitVelocity * Math.log(iMass / fMass);
+  }
+  
+  
   return (
     <>
       <div>
