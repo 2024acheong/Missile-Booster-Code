@@ -1,0 +1,22 @@
+{
+  "name": "mbc",
+  "version": "1.0.0",
+  "main": "code.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "copyfiles -u 1 src/* dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "canvas": "^3.1.0",
+    "mathjs": "^14.4.0",
+    "turtle-js": "^1.0.4"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
+  }
+}
+
