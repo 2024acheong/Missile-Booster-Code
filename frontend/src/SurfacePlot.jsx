@@ -19,38 +19,79 @@ const Z_no_booster = massRatios.map((m1) =>
 const boosterEffect = deltaV(Isp.booster, 0.9);
 const Z_with_booster = Z_no_booster.map((row) => row.map((value) => value + boosterEffect));
 
+// ... existing code ...
+
 const SurfacePlot = () => {
-  return (
-    <Plot
-      data={[
-        {
-          z: Z_no_booster,
-          x: massRatios,
-          y: massRatios,
-          type: "surface",
-          colorscale: "Viridis",
-          name: "Without Booster",
-        },
-        {
-          z: Z_with_booster,
-          x: massRatios,
-          y: massRatios,
-          type: "surface",
-          colorscale: "Hot",
-          opacity: 0.7,
-          name: "With Booster",
-        },
-      ]}
-      layout={{
-        title: "ΔV 3D Surface Plot",
-        scene: {
-          xaxis: { title: "Stage 1 Mass Ratio" },
-          yaxis: { title: "Stage 2 Mass Ratio" },
-          zaxis: { title: "Total ΔV (m/s)" },
-        },
-      }}
-    />
-  );
-};
+    return (
+      <Plot
+        data={[
+          {
+            z: Z_no_booster,
+            x: massRatios,
+            y: massRatios,
+            type: "surface",
+            colorscale: "Viridis",
+            name: "Without Booster",
+            colorbar: {
+              title: {
+                text: 'ΔV (m/s)',
+                side: 'right'
+              }
+            },
+          },
+          {
+            z: Z_with_booster,
+            x: massRatios,
+            y: massRatios,
+            type: "surface",
+            colorscale: "Hot",
+            opacity: 0.7,
+            name: "With Booster",
+            colorbar: {
+              title: {
+                text: 'ΔV (m/s)',
+                side: 'right'
+              }
+            },
+          },
+        ]}
+        layout={{
+          title: {
+            text: 'Rocket ΔV 3D Surface Analysis',
+            font: { size: 24 }
+          },
+          scene: {
+            xaxis: {
+              title: {
+                text: 'Stage 1 Mass Ratio',
+                font: { size: 14 }
+              }
+            },
+            yaxis: {
+              title: {
+                text: 'Stage 2 Mass Ratio',
+                font: { size: 14 }
+              }
+            },
+            zaxis: {
+              title: {
+                text: 'Total ΔV (m/s)',
+                font: { size: 14 }
+              }
+            },
+          },
+          annotations: [{
+            text: 'Compare ΔV with and without booster stage',
+            showarrow: false,
+            x: 0.5,
+            y: -0.15,
+            xref: 'paper',
+            yref: 'paper',
+            font: { size: 12 }
+          }],
+        }}
+      />
+    );
+  };
 
 export default SurfacePlot;

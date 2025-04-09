@@ -8,7 +8,7 @@ const Isp = { stage1: 250, stage2: 300, stage3: 350, booster: 200 };
 const massRatios = Array.from({ length: 21 }, (_, i) => 0.8 + i * 0.01);
 
 // Function to compute ΔV
-const deltaV = (Isp, massRatio) => Isp * g0 * Math.log(massRatio);
+const deltaV = (Isp, massRatio) => Isp * g0 * Math.log(1/massRatio);
 
 // Compute data for heatmap
 const heatmapData = massRatios.map((m1) =>
@@ -16,6 +16,8 @@ const heatmapData = massRatios.map((m1) =>
     deltaV(Isp.stage1, m1) + deltaV(Isp.stage2, m2) + deltaV(Isp.stage3, 0.9)
   )
 );
+
+// ... existing code ...
 
 function App() {
   return (
@@ -28,18 +30,63 @@ function App() {
           data={[
             {
               z: heatmapData,
-              x: massRatios,
-              y: massRatios,
+              x: massRatios.map(ratio => `${ratio.toFixed(2)}`),
+              y: massRatios.map(ratio => `${ratio.toFixed(2)}`),
               type: "heatmap",
               colorscale: "Viridis",
+              colorbar: {
+                title: {
+                  text: 'Total ΔV (m/s)',
+                  side: 'right'
+                },
+                len: 0.9
+              },
             },
           ]}
           layout={{
-            title: "ΔV Heatmap",
-            xaxis: { title: "Stage 1 Mass Ratio" },
-            yaxis: { title: "Stage 2 Mass Ratio" },
-            width: 600,
-            height: 500,
+            title: {
+              text: 'Rocket ΔV Heatmap Analysis',
+              font: { size: 24 }
+            },
+            margin: {
+              l: 100,  // left margin
+              r: 100,  // right margin
+              t: 100,  // top margin
+              b: 100   // bottom margin
+            },
+            xaxis: {
+              title: {
+                text: 'Stage One Mass Ratio (m₁/m₀)',
+                font: { size: 14 },
+                standoff: 20  // Distance between title and axis
+              },
+              tickmode: 'array',
+              ticktext: massRatios.filter((_, i) => i % 4 === 0).map(ratio => ratio.toFixed(2)),
+              tickvals: massRatios.filter((_, i) => i % 4 === 0),
+              tickangle: 0
+            },
+            yaxis: {
+              title: {
+                text: 'Stage Two Mass Ratio (m₁/m₀)',
+                font: { size: 14 },
+                standoff: 20  // Distance between title and axis
+              },
+              tickmode: 'array',
+              ticktext: massRatios.filter((_, i) => i % 4 === 0).map(ratio => ratio.toFixed(2)),
+              tickvals: massRatios.filter((_, i) => i % 4 === 0)
+            },
+            annotations: [{
+              text: 'Color intensity represents total ΔV (higher values = brighter)',
+              showarrow: false,
+              x: 0.5,
+              y: -0.2,
+              xref: 'paper',
+              yref: 'paper',
+              font: { size: 12 }
+            }],
+            width: 700,    // Increased width
+            height: 600,   // Increased height
+            autosize: false
           }}
         />
       </div>
